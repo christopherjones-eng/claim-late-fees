@@ -1,40 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Professional Late Payment Recovery Design System */
 
 @layer base {
   :root {
+    /* Core Brand Colors - Late Payment Recovery Theme */
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
+    --foreground: 217 91% 16%;
+    
+    /* Deep Navy Primary - Trust & Authority */
+    --primary: 217 91% 16%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 217 91% 25%;
+    --primary-dark: 217 91% 10%;
+    
+    /* Bright Teal Secondary - Action & Recovery */
+    --secondary: 175 100% 39%;
+    --secondary-foreground: 217 91% 16%;
+    --secondary-light: 175 100% 50%;
+    --secondary-dark: 175 100% 30%;
+    
+    /* Neutral Grays */
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
+    --accent: 220 14% 96%;
+    --accent-foreground: 217 91% 16%;
+    
+    /* Card & Interface */
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
+    --card-foreground: 217 91% 16%;
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --popover-foreground: 217 91% 16%;
+    
+    /* Form Elements */
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 175 100% 39%;
+    
+    /* Status Colors */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 217 91% 16%;
+    
+    /* Design System Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(217 91% 16%), hsl(217 91% 25%));
+    --gradient-secondary: linear-gradient(135deg, hsl(175 100% 39%), hsl(175 100% 50%));
+    --gradient-hero: linear-gradient(135deg, hsl(217 91% 16%) 0%, hsl(217 91% 25%) 50%, hsl(175 100% 39%) 100%);
+    
+    /* Shadows */
+    --shadow-subtle: 0 1px 3px 0 hsl(217 91% 16% / 0.1), 0 1px 2px 0 hsl(217 91% 16% / 0.06);
+    --shadow-medium: 0 4px 6px -1px hsl(217 91% 16% / 0.1), 0 2px 4px -1px hsl(217 91% 16% / 0.06);
+    --shadow-large: 0 10px 15px -3px hsl(217 91% 16% / 0.1), 0 4px 6px -2px hsl(217 91% 16% / 0.05);
+    --shadow-glow: 0 0 40px hsl(175 100% 39% / 0.3);
+    
+    /* Typography Scale */
+    --font-family-primary: 'Montserrat', system-ui, -apple-system, sans-serif;
+    
+    /* Spacing & Layout */
+    --radius: 0.5rem;
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
     --radius: 0.5rem;
 
@@ -100,6 +131,49 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-primary antialiased;
+  }
+}
+
+@layer components {
+  /* Professional Button Variants */
+  .btn-hero {
+    @apply bg-gradient-to-r from-secondary to-secondary-light text-secondary-foreground font-semibold px-8 py-4 rounded-lg shadow-lg hover:shadow-glow transform hover:-translate-y-1 transition-all duration-300;
+  }
+  
+  .btn-primary {
+    @apply bg-primary text-primary-foreground font-medium px-6 py-3 rounded-lg shadow-medium hover:bg-primary-light transition-colors duration-300;
+  }
+  
+  .btn-outline {
+    @apply border-2 border-primary text-primary font-medium px-6 py-3 rounded-lg hover:bg-primary hover:text-primary-foreground transition-all duration-300;
+  }
+  
+  /* Professional Card Styles */
+  .card-professional {
+    @apply bg-card rounded-xl shadow-medium border border-border p-6 hover:shadow-large transition-shadow duration-300;
+  }
+  
+  /* Hero Section */
+  .hero-gradient {
+    background: var(--gradient-hero);
+  }
+  
+  /* Typography Utilities */
+  .text-hero {
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold leading-tight;
+  }
+  
+  .text-subtitle {
+    @apply text-lg md:text-xl text-muted-foreground leading-relaxed;
+  }
+  
+  /* Professional Layout */
+  .section-padding {
+    @apply py-16 md:py-24;
+  }
+  
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 }
