@@ -6,10 +6,10 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navigation = [
-    { name: "How It Works", href: "#how-it-works" },
-    { name: "About Us", href: "#about" },
-    { name: "FAQ", href: "#faq" },
-    { name: "Contact", href: "#contact" },
+    { name: "Home", href: "/" },
+    { name: "How It Works", href: "/how-it-works" },
+    { name: "About Us", href: "/about" },
+    { name: "Contact", href: "/contact" },
   ];
 
   return (
@@ -36,12 +36,13 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* CTA */}
-          <div className="hidden lg:flex items-center">
-            <Button 
-              className="btn-hero"
-              onClick={() => document.getElementById('claim-form')?.scrollIntoView({ behavior: 'smooth' })}
-            >
+          {/* Contact Info & CTA */}
+          <div className="hidden lg:flex items-center space-x-4">
+            <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+              <Phone className="h-4 w-4" />
+              <span>0800 123 4567</span>
+            </div>
+            <Button className="btn-hero">
               Start Your Claim
             </Button>
           </div>
@@ -72,13 +73,7 @@ const Header = () => {
                 </a>
               ))}
               <div className="px-3 py-2">
-                <Button 
-                  className="btn-hero w-full"
-                  onClick={() => {
-                    setIsMenuOpen(false);
-                    document.getElementById('claim-form')?.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                >
+                <Button className="btn-hero w-full">
                   Start Your Claim
                 </Button>
               </div>

@@ -12,6 +12,7 @@ const ClaimForm = () => {
     companyName: "",
     contactName: "",
     email: "",
+    phone: "",
     debtorCompany: "",
     invoiceAmount: "",
     invoiceDate: "",
@@ -31,6 +32,7 @@ const ClaimForm = () => {
       companyName: "",
       contactName: "",
       email: "",
+      phone: "",
       debtorCompany: "",
       invoiceAmount: "",
       invoiceDate: "",
@@ -96,17 +98,31 @@ const ClaimForm = () => {
                   </div>
                 </div>
 
-                <div>
-                  <Label htmlFor="email">Email Address</Label>
-                  <Input
-                    id="email"
-                    name="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    placeholder="your@email.com"
-                  />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <Label htmlFor="email">Email Address</Label>
+                    <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      placeholder="your@email.com"
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="phone">Phone Number</Label>
+                    <Input
+                      id="phone"
+                      name="phone"
+                      type="tel"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      required
+                      placeholder="0800 123 4567"
+                    />
+                  </div>
                 </div>
 
                 <div>
