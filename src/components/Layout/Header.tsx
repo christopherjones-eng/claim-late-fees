@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Phone, Mail } from "lucide-react";
+import { Menu, X, Mail } from "lucide-react";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -36,11 +36,11 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* Contact Info & CTA */}
+          {/* CTA & Email */}
           <div className="hidden lg:flex items-center space-x-4">
             <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-              <Phone className="h-4 w-4" />
-              <span>0800 123 4567</span>
+              <Mail className="h-4 w-4" />
+              <span>claims@claimpayuk.com</span>
             </div>
             <Button className="btn-hero">
               Start Your Claim

@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Phone, Mail, MapPin, Clock, MessageCircle } from "lucide-react";
+import { Mail, MapPin, Clock, MessageCircle } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -13,7 +13,6 @@ const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    phone: "",
     company: "",
     subject: "",
     message: ""
@@ -30,7 +29,6 @@ const Contact = () => {
     setFormData({
       name: "",
       email: "",
-      phone: "",
       company: "",
       subject: "",
       message: ""
@@ -45,12 +43,6 @@ const Contact = () => {
   };
 
   const contactInfo = [
-    {
-      icon: Phone,
-      title: "Phone",
-      details: "0800 123 4567",
-      subtitle: "Free consultation line"
-    },
     {
       icon: Mail,
       title: "Email",
@@ -169,28 +161,15 @@ const Contact = () => {
                       </div>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <Label htmlFor="phone">Phone Number</Label>
-                        <Input
-                          id="phone"
-                          name="phone"
-                          type="tel"
-                          value={formData.phone}
-                          onChange={handleChange}
-                          placeholder="0800 123 4567"
-                        />
-                      </div>
-                      <div>
-                        <Label htmlFor="company">Company Name</Label>
-                        <Input
-                          id="company"
-                          name="company"
-                          value={formData.company}
-                          onChange={handleChange}
-                          placeholder="Your company name"
-                        />
-                      </div>
+                    <div>
+                      <Label htmlFor="company">Company Name</Label>
+                      <Input
+                        id="company"
+                        name="company"
+                        value={formData.company}
+                        onChange={handleChange}
+                        placeholder="Your company name"
+                      />
                     </div>
 
                     <div>

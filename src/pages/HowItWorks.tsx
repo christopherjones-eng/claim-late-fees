@@ -1,7 +1,7 @@
 import Layout from "@/components/Layout/Layout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { FileText, Search, Phone, CreditCard, CheckCircle } from "lucide-react";
+import { FileText, Search, MessageCircle, CreditCard, CheckCircle } from "lucide-react";
 
 const HowItWorks = () => {
   const steps = [
@@ -18,9 +18,9 @@ const HowItWorks = () => {
       time: "24-48 hours"
     },
     {
-      icon: Phone,
+      icon: MessageCircle,
       title: "Professional Contact",
-      description: "We contact your debtor professionally, citing legal obligations and consequences. Most cases resolve at this stage without court action.",
+      description: "We contact your debtor professionally via email and formal letters, citing legal obligations and consequences. Most cases resolve at this stage without court action.",
       time: "7-14 days"
     },
     {
