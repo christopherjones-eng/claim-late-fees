@@ -15,7 +15,7 @@ const About = () => {
     {
       name: "James Richardson",
       role: "Founder & CEO",
-      background: "Former credit controller with 12 years experience at leading UK law firms. Specialises in commercial debt recovery and late payment legislation.",
+      background: "Former credit controller with 12 years experience at leading UK law firms. Specializes in commercial debt recovery and late payment legislation.",
       image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face"
     },
     {
@@ -111,6 +111,11 @@ const About = () => {
               {team.map((member, index) => (
                 <Card key={index} className="card-professional text-center">
                   <CardContent className="p-6">
+                    <img 
+                      src={member.image}
+                      alt={member.name}
+                      className="w-24 h-24 rounded-full mx-auto mb-4 object-cover"
+                    />
                     <h3 className="text-xl font-semibold text-foreground mb-2">
                       {member.name}
                     </h3>
@@ -158,7 +163,7 @@ const About = () => {
                     SME-Focused Approach
                   </h3>
                   <p className="text-muted-foreground">
-                    We specialise in helping small and medium businesses. We understand 
+                    We specialize in helping small and medium businesses. We understand 
                     your challenges and design our service around your needs.
                   </p>
                 </div>
