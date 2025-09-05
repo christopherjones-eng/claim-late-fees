@@ -98,7 +98,7 @@ const Contact = () => {
                         <h3 className="font-semibold text-foreground mb-1">
                           {item.title}
                         </h3>
-                        <p className="text-foreground font-medium">
+                        <p className="text-foreground font-medium break-all">
                           {item.details}
                         </p>
                         <p className="text-sm text-muted-foreground">
