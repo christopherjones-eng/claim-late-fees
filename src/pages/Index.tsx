@@ -4,6 +4,7 @@ import ClaimForm from "@/components/Home/ClaimForm";
 import HowItWorks from "@/components/Home/HowItWorks";
 import ProvenTrackRecord from "@/components/Home/ProvenTrackRecord";
 import CustomerTestimonials from "@/components/Home/CustomerTestimonials";
+import FAQ from "@/components/Home/FAQ";
 
 const Index = () => {
   return (
@@ -13,6 +14,7 @@ const Index = () => {
       <HowItWorks />
       <ProvenTrackRecord />
       <CustomerTestimonials />
+      <FAQ />
     </Layout>
   );
 };
