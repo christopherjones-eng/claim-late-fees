@@ -1,29 +1,29 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 const FAQ = () => {
   const faqs = [{
-    question: "How much does your service cost?",
-    answer: "We work on a 'No Win, No Fee' basis. You pay nothing upfront and only pay when we successfully recover your money. Our fee is a percentage of the amount recovered, ensuring our interests are aligned with yours."
+    question: "Am I eligible to claim late payment compensation?",
+    answer: "Under the Late Payment of Commercial Debts (Interest) Act 1998, you can claim if: your debtor is over 30 days late (or beyond agreed terms), you've supplied goods/services to another business, and your contract doesn't exclude statutory rights. Most B2B transactions qualify."
   }, {
-    question: "How long does the debt recovery process take?",
-    answer: "Most cases are resolved within 4-8 weeks, though this can vary depending on the debtor's response and the complexity of the case. We'll keep you updated throughout the entire process and provide regular progress reports."
+    question: "How much compensation can I claim for late payments?",
+    answer: "You're entitled to statutory interest (8% above Bank of England base rate) plus fixed compensation: £40 for debts under £1,000, £70 for £1,000-£9,999, £100 for £10,000+. You can also claim reasonable debt recovery costs on top."
   }, {
-    question: "What types of debts can you help recover?",
-    answer: "We specialize in commercial debt recovery including unpaid invoices, outstanding contracts, late payment fees, and business-to-business debts. We handle cases from £500 to £100,000+ across all industries."
+    question: "Do contract payment terms override statutory rights?",
+    answer: "No. While contracts can set payment terms (e.g., 60 days), they cannot remove your statutory right to claim interest and compensation once those terms are breached. The Late Payment Act protects smaller businesses from unfair contract terms."
   }, {
-    question: "Do you handle international debt recovery?",
-    answer: "Yes, we have experience recovering debts from international clients, particularly within Europe. We work with trusted partners abroad and understand the complexities of cross-border debt recovery."
+    question: "Can I claim against public sector organizations?",
+    answer: "Yes. The Late Payment Act applies to all UK public bodies including councils, NHS trusts, and government departments. They must pay within 30 days unless different terms are agreed, and you can claim full statutory compensation for late payment."
   }, {
-    question: "What happens if the debtor refuses to pay?",
-    answer: "We have a structured escalation process including formal demand letters, statutory demands, and if necessary, court proceedings. Our legal team ensures we exhaust all appropriate channels to recover your debt."
+    question: "What if my contract specifies different interest rates?",
+    answer: "Contractual interest rates only apply if they're 'substantial remedy' (typically higher than statutory 8%+). If your contract rate is lower, you can claim the statutory rate instead. We'll review your terms and claim the higher amount."
   }, {
-    question: "Will using a debt recovery service damage my business relationships?",
-    answer: "We approach each case professionally and diplomatically. Many businesses find that using our services actually preserves relationships by removing the awkwardness of direct confrontation while demonstrating you're serious about payment terms."
+    question: "How long do I have to make a late payment claim?",
+    answer: "You have 6 years from the payment due date to claim statutory interest and compensation. However, acting quickly (within 3-6 months) typically yields better results as debts become harder to recover over time."
   }, {
-    question: "What information do I need to provide to start the process?",
-    answer: "We need basic details about the debt including invoice copies, contracts, correspondence with the debtor, and proof of goods/services delivered. Our simple online form guides you through exactly what we need."
+    question: "What proof do I need for my claim?",
+    answer: "Essential documents: original invoice, proof of delivery/completion, your standard terms & conditions, and evidence payment is overdue. We'll also need any contract terms and correspondence with the debtor. Our online form guides you through what's required."
   }, {
-    question: "What is your success rate for debt recovery?",
-    answer: "We maintain a 94% success rate across all cases. This high success rate is due to our experienced legal team, proven processes, and determination to recover what you're owed."
+    question: "Will claiming affect future business relationships?",
+    answer: "Professional late payment recovery often strengthens relationships by establishing clear boundaries. Many businesses prefer dealing with suppliers who have clear payment processes. We handle all communication diplomatically while protecting your legal rights."
   }];
   return <section className="section-padding bg-muted/30">
       <div className="container-custom">

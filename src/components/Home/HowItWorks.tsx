@@ -18,9 +18,9 @@ const HowItWorks = () => {
             <div className="flex items-center justify-center w-16 h-16 bg-primary text-primary-foreground rounded-full mx-auto mb-6 text-xl font-bold group-hover:scale-110 transition-transform duration-300">
               1
             </div>
-            <h3 className="text-xl font-semibold text-foreground mb-4">Submit Your Claim</h3>
+            <h3 className="text-xl font-semibold text-foreground mb-4">Submit Invoice Details</h3>
             <p className="text-muted-foreground leading-relaxed">
-              Provide basic details about your unpaid invoice - takes less than 2 minutes. No complex paperwork required.
+              Upload your overdue invoice and delivery proof. We calculate your statutory entitlement under the Late Payment Act—takes under 3 minutes.
             </p>
           </div>
           
@@ -28,9 +28,9 @@ const HowItWorks = () => {
             <div className="flex items-center justify-center w-16 h-16 bg-secondary text-secondary-foreground rounded-full mx-auto mb-6 text-xl font-bold group-hover:scale-110 transition-transform duration-300">
               2
             </div>
-            <h3 className="text-xl font-semibold text-foreground mb-4">We Take Action</h3>
+            <h3 className="text-xl font-semibold text-foreground mb-4">Legal Demand Process</h3>
             <p className="text-muted-foreground leading-relaxed">
-              Our legal experts handle all communication and proceedings on your behalf. You can focus on your business.
+              We issue formal demand notices citing specific legislative rights, then escalate through statutory processes if needed. Professional, legally-backed recovery.
             </p>
           </div>
           
@@ -38,9 +38,9 @@ const HowItWorks = () => {
             <div className="flex items-center justify-center w-16 h-16 bg-accent text-accent-foreground rounded-full mx-auto mb-6 text-xl font-bold group-hover:scale-110 transition-transform duration-300">
               3
             </div>
-            <h3 className="text-xl font-semibold text-foreground mb-4">Get Paid</h3>
+            <h3 className="text-xl font-semibold text-foreground mb-4">Collect Full Amount</h3>
             <p className="text-muted-foreground leading-relaxed">
-              We recover your money plus compensation for late payment. You pay nothing upfront - we only succeed when you do.
+              Recover original debt + 8% statutory interest + fixed compensation + our fees. Average recovery: 14-28 days. You only pay when money is in your account.
             </p>
           </div>
         </div>

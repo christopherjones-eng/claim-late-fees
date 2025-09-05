@@ -12,14 +12,14 @@ const HeroSection = () => {
         <div className="max-w-4xl mx-auto text-center">
           {/* Hero Headline */}
           <h1 className="text-hero mb-6">
-            Get Paid Faster. 
-            <span className="text-secondary block">Claim Your Late Payment Fees Today.</span>
+            Recover What You're Owed—Fast. 
+            <span className="text-secondary block">No Win, No Fee.</span>
           </h1>
           
           {/* Sub-headline */}
           <p className="text-subtitle mb-8 text-primary-foreground/90">
-            We help UK businesses recover what's legally owed — quickly, efficiently, 
-            and at no upfront cost. Stop chasing late payments and start claiming compensation.
+            Turn unpaid invoices into recovered funds plus statutory compensation. 
+            UK Late Payment Act gives you legal right to claim—we make it happen.
           </p>
 
           {/* Primary CTA */}

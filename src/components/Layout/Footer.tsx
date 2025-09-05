@@ -1,4 +1,4 @@
-import { Mail, MapPin } from "lucide-react";
+import { Mail, MapPin, Phone, Clock } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -21,8 +21,16 @@ const Footer = () => {
                 <span>claims@claimpayuk.com</span>
               </div>
               <div className="flex items-center space-x-2">
+                <Phone className="h-4 w-4 text-secondary" />
+                <span>0800 123 4567</span>
+              </div>
+              <div className="flex items-center space-x-2">
                 <MapPin className="h-4 w-4 text-secondary" />
-                <span>London, United Kingdom</span>
+                <span>71-75 Shelton Street, London WC2H 9JQ</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Clock className="h-4 w-4 text-secondary" />
+                <span>Mon-Fri: 9AM-6PM</span>
               </div>
             </div>
           </div>
@@ -40,23 +48,34 @@ const Footer = () => {
 
           {/* Legal */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Legal</h3>
+            <h3 className="text-lg font-semibold mb-4">Legal & Compliance</h3>
             <ul className="space-y-2">
               <li><a href="/privacy" className="text-primary-foreground/80 hover:text-secondary transition-colors">Privacy Policy</a></li>
               <li><a href="/terms" className="text-primary-foreground/80 hover:text-secondary transition-colors">Terms of Service</a></li>
-              <li><a href="/gdpr" className="text-primary-foreground/80 hover:text-secondary transition-colors">GDPR Compliance</a></li>
+              <li><a href="/cookies" className="text-primary-foreground/80 hover:text-secondary transition-colors">Cookie Policy</a></li>
+              <li><span className="text-primary-foreground/60 text-sm">FCA Regulated</span></li>
             </ul>
           </div>
         </div>
 
         <div className="border-t border-primary-light/20 mt-8 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-primary-foreground/60 text-sm">
-              © 2024 ClaimPayUK. All rights reserved. Registered in England & Wales.
-            </p>
-            <p className="text-primary-foreground/60 text-sm mt-2 md:mt-0">
-              Regulated by the Financial Conduct Authority
-            </p>
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+            <div className="text-center md:text-left">
+              <p className="text-primary-foreground/60 text-sm">
+                © 2024 ClaimPayUK Limited. All rights reserved.
+              </p>
+              <p className="text-primary-foreground/60 text-sm">
+                Registered in England & Wales. Company No: 12345678
+              </p>
+            </div>
+            <div className="text-center md:text-right">
+              <p className="text-primary-foreground/60 text-sm">
+                Authorised and regulated by the Financial Conduct Authority
+              </p>
+              <p className="text-primary-foreground/60 text-sm">
+                Professional debt recovery services under UK Late Payment Act
+              </p>
+            </div>
           </div>
         </div>
       </div>
