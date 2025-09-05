@@ -1,9 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Star } from "lucide-react";
-
 const CustomerTestimonials = () => {
-  return (
-    <section className="section-padding bg-muted/30">
+  return <section className="section-padding bg-muted/30">
       <div className="container-custom">
         <div className="text-center mb-16">
           <h2 className="text-3xl font-bold text-foreground mb-4">
@@ -18,28 +16,22 @@ const CustomerTestimonials = () => {
           <Card className="card-professional hover:shadow-lg transition-shadow duration-300">
             <CardHeader>
               <div className="flex items-center mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                ))}
+                {[...Array(5)].map((_, i) => <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />)}
               </div>
               <CardTitle className="text-xl text-card-foreground">Sarah Johnson</CardTitle>
               <CardDescription className="text-muted-foreground">Marketing Agency Owner</CardDescription>
             </CardHeader>
             <CardContent>
-              <p className="text-card-foreground leading-relaxed">
-                "They recovered £12,000 that I thought was lost forever. Professional, efficient, and no upfront costs. The peace of mind alone was worth it!"
-              </p>
+              <p className="text-card-foreground leading-relaxed">"Overall, they recovered £12,000 that I thought was lost forever. Professional, efficient, and no upfront costs. The peace of mind alone was worth it!"</p>
             </CardContent>
           </Card>
 
           <Card className="card-professional hover:shadow-lg transition-shadow duration-300">
             <CardHeader>
               <div className="flex items-center mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                ))}
+                {[...Array(5)].map((_, i) => <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />)}
               </div>
-              <CardTitle className="text-xl text-card-foreground">Michael Chen</CardTitle>
+              <CardTitle className="text-xl text-card-foreground">Michael Williams</CardTitle>
               <CardDescription className="text-muted-foreground">Construction Company Director</CardDescription>
             </CardHeader>
             <CardContent>
@@ -52,9 +44,7 @@ const CustomerTestimonials = () => {
           <Card className="card-professional hover:shadow-lg transition-shadow duration-300">
             <CardHeader>
               <div className="flex items-center mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                ))}
+                {[...Array(5)].map((_, i) => <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />)}
               </div>
               <CardTitle className="text-xl text-card-foreground">Emma Thompson</CardTitle>
               <CardDescription className="text-muted-foreground">Freelance Consultant</CardDescription>
@@ -67,8 +57,6 @@ const CustomerTestimonials = () => {
           </Card>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default CustomerTestimonials;
