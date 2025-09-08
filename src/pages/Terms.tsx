@@ -1,8 +1,6 @@
 import Layout from "@/components/Layout/Layout";
-
 const Terms = () => {
-  return (
-    <Layout>
+  return <Layout>
       <div className="section-padding bg-background">
         <div className="container-custom max-w-4xl">
           <div className="mb-8">
@@ -39,10 +37,7 @@ const Terms = () => {
 
             <section className="mb-8">
               <h2 className="text-2xl font-semibold text-foreground mb-4">3. Fees and Payment</h2>
-              <p className="text-muted-foreground mb-4">
-                Our standard fee is 25% of the total amount recovered (including interest and compensation). 
-                This fee is only charged upon successful recovery.
-              </p>
+              <p className="text-muted-foreground mb-4">Our standard fee is 35% of the total amount recovered (including interest and compensation). This fee is only charged upon successful recovery.</p>
               <p className="text-muted-foreground mb-4">
                 You are entitled to statutory compensation and interest under UK law, which forms part of your recovery.
               </p>
@@ -104,8 +99,6 @@ const Terms = () => {
           </div>
         </div>
       </div>
-    </Layout>
-  );
+    </Layout>;
 };
-
 export default Terms;
