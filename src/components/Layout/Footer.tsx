@@ -1,8 +1,6 @@
 import { Mail, MapPin, Phone, Clock } from "lucide-react";
-
 const Footer = () => {
-  return (
-    <footer className="bg-primary text-primary-foreground">
+  return <footer className="bg-primary text-primary-foreground">
       <div className="container-custom py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Company Info */}
@@ -20,10 +18,7 @@ const Footer = () => {
                 <Mail className="h-4 w-4 text-secondary" />
                 <span>claims@claimpayuk.com</span>
               </div>
-              <div className="flex items-center space-x-2">
-                <Phone className="h-4 w-4 text-secondary" />
-                <span>0800 123 4567</span>
-              </div>
+              
               <div className="flex items-center space-x-2">
                 <MapPin className="h-4 w-4 text-secondary" />
                 <span>71-75 Shelton Street, London WC2H 9JQ</span>
@@ -69,9 +64,7 @@ const Footer = () => {
               </p>
             </div>
             <div className="text-center md:text-right">
-              <p className="text-primary-foreground/60 text-sm">
-                Authorised and regulated by the Financial Conduct Authority
-              </p>
+              
               <p className="text-primary-foreground/60 text-sm">
                 Professional debt recovery services under UK Late Payment Act
               </p>
@@ -79,8 +72,6 @@ const Footer = () => {
           </div>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
