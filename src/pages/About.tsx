@@ -153,10 +153,7 @@ const About = () => {
                   <h3 className="text-xl font-semibold text-foreground mb-3">
                     SME-Focused Approach
                   </h3>
-                  <p className="text-muted-foreground">
-                    We specialize in helping small and medium businesses. We understand 
-                    your challenges and design our service around your needs.
-                  </p>
+                  <p className="text-muted-foreground">We specialise in helping small and medium businesses. We understand your challenges and design our service around your needs.</p>
                 </div>
                 <div>
                   <h3 className="text-xl font-semibold text-foreground mb-3">
