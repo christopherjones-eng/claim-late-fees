@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Mail, MapPin, Phone, Clock } from "lucide-react";
 const Footer = () => {
   return <footer className="bg-primary text-primary-foreground">
@@ -34,10 +35,10 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
-              <li><a href="/" className="text-primary-foreground/80 hover:text-secondary transition-colors">Home</a></li>
-              <li><a href="/how-it-works" className="text-primary-foreground/80 hover:text-secondary transition-colors">How It Works</a></li>
-              <li><a href="/about" className="text-primary-foreground/80 hover:text-secondary transition-colors">About Us</a></li>
-              <li><a href="/contact" className="text-primary-foreground/80 hover:text-secondary transition-colors">Contact</a></li>
+              <li><Link to="/" className="text-primary-foreground/80 hover:text-secondary transition-colors">Home</Link></li>
+              <li><Link to="/how-it-works" className="text-primary-foreground/80 hover:text-secondary transition-colors">How It Works</Link></li>
+              <li><Link to="/about" className="text-primary-foreground/80 hover:text-secondary transition-colors">About Us</Link></li>
+              <li><Link to="/contact" className="text-primary-foreground/80 hover:text-secondary transition-colors">Contact</Link></li>
             </ul>
           </div>
 
@@ -45,9 +46,9 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Legal & Compliance</h3>
             <ul className="space-y-2">
-              <li><a href="/privacy" className="text-primary-foreground/80 hover:text-secondary transition-colors">Privacy Policy</a></li>
-              <li><a href="/terms" className="text-primary-foreground/80 hover:text-secondary transition-colors">Terms of Service</a></li>
-              <li><a href="/cookies" className="text-primary-foreground/80 hover:text-secondary transition-colors">Cookie Policy</a></li>
+              <li><Link to="/privacy" className="text-primary-foreground/80 hover:text-secondary transition-colors">Privacy Policy</Link></li>
+              <li><Link to="/terms" className="text-primary-foreground/80 hover:text-secondary transition-colors">Terms of Service</Link></li>
+              <li><Link to="/cookies" className="text-primary-foreground/80 hover:text-secondary transition-colors">Cookie Policy</Link></li>
               
             </ul>
           </div>
