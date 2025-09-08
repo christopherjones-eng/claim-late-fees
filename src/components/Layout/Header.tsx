@@ -6,6 +6,10 @@ import { Menu, X, Mail } from "lucide-react";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const scrollToClaimForm = () => {
+    document.getElementById('claim-form')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   const navigation = [
     { name: "Home", href: "/" },
     { name: "How It Works", href: "/how-it-works" },
@@ -43,7 +47,7 @@ const Header = () => {
               <Mail className="h-4 w-4" />
               <span>claims@claimpayuk.com</span>
             </div>
-            <Button className="btn-hero">
+            <Button onClick={scrollToClaimForm} className="btn-hero">
               Start Your Claim
             </Button>
           </div>
@@ -74,7 +78,7 @@ const Header = () => {
                 </Link>
               ))}
               <div className="px-3 py-2">
-                <Button className="btn-hero w-full">
+                <Button onClick={scrollToClaimForm} className="btn-hero w-full">
                   Start Your Claim
                 </Button>
               </div>
