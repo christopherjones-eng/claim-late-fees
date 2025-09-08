@@ -48,7 +48,7 @@ const Footer = () => {
               <li><a href="/privacy" className="text-primary-foreground/80 hover:text-secondary transition-colors">Privacy Policy</a></li>
               <li><a href="/terms" className="text-primary-foreground/80 hover:text-secondary transition-colors">Terms of Service</a></li>
               <li><a href="/cookies" className="text-primary-foreground/80 hover:text-secondary transition-colors">Cookie Policy</a></li>
-              <li><span className="text-primary-foreground/60 text-sm">FCA Regulated</span></li>
+              
             </ul>
           </div>
         </div>
