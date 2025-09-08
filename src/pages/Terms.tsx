@@ -33,7 +33,7 @@ const Terms = () => {
                 <li>Debt must be from business-to-business transactions</li>
                 <li>Payment must be overdue by at least 30 days</li>
                 <li>You must have supplied goods or services as agreed</li>
-                <li>Minimum claim value of £250</li>
+                <li>Minimum claim value of £5000</li>
               </ul>
             </section>
 
