@@ -2,7 +2,16 @@ import Layout from "@/components/Layout/Layout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Users, Target, Award, TrendingUp } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 const About = () => {
+  const navigate = useNavigate();
+
+  const handleStartClaim = () => {
+    navigate('/', { replace: true });
+    setTimeout(() => {
+      document.getElementById('claim-form')?.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+  };
   const stats = [{
     label: "Money Recovered",
     value: "£2.3M+",
@@ -176,7 +185,7 @@ const About = () => {
             <p className="text-xl text-muted-foreground mb-8">
               Let our expert team recover what's rightfully yours.
             </p>
-            <Button className="btn-hero text-lg px-10 py-4">
+            <Button onClick={handleStartClaim} className="btn-hero text-lg px-10 py-4">
               Start Your Claim Today
             </Button>
           </div>

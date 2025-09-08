@@ -2,8 +2,17 @@ import Layout from "@/components/Layout/Layout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { FileText, Search, MessageCircle, CreditCard, CheckCircle } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const HowItWorks = () => {
+  const navigate = useNavigate();
+
+  const handleStartClaim = () => {
+    navigate('/', { replace: true });
+    setTimeout(() => {
+      document.getElementById('claim-form')?.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
+  };
   const steps = [
     {
       icon: FileText,
@@ -137,7 +146,7 @@ const HowItWorks = () => {
             <p className="text-xl text-muted-foreground mb-8">
               Join hundreds of UK businesses who have recovered over £2.3M in late payment fees.
             </p>
-            <Button className="btn-hero text-lg px-10 py-4">
+            <Button onClick={handleStartClaim} className="btn-hero text-lg px-10 py-4">
               Start Your Claim Now
             </Button>
           </div>
