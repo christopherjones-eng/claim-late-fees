@@ -6,11 +6,8 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Mail, MapPin, Clock, MessageCircle } from "lucide-react";
 import { useState } from "react";
-import { useToast } from "@/hooks/use-toast";
+
 const Contact = () => {
-  const {
-    toast
-  } = useToast();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -18,44 +15,37 @@ const Contact = () => {
     subject: "",
     message: ""
   });
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast({
-      title: "Message Sent Successfully!",
-      description: "Thank you for contacting us. We'll respond within 24 hours.",
-      duration: 5000
-    });
-    setFormData({
-      name: "",
-      email: "",
-      company: "",
-      subject: "",
-      message: ""
-    });
-  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData(prev => ({
       ...prev,
       [e.target.name]: e.target.value
     }));
   };
-  const contactInfo = [{
-    icon: Mail,
-    title: "Email",
-    details: "claims@claimpayuk.com",
-    subtitle: "24/7 support inbox"
-  }, {
-    icon: MapPin,
-    title: "Address",
-    details: "25 Finsbury Circus, London EC2M 7EA",
-    subtitle: "Registered office"
-  }, {
-    icon: Clock,
-    title: "Hours",
-    details: "Mon-Fri: 9AM-6PM",
-    subtitle: "Emergency support available"
-  }];
-  return <Layout>
+
+  const contactInfo = [
+    {
+      icon: Mail,
+      title: "Email",
+      details: "claims@claimpayuk.com",
+      subtitle: "24/7 support inbox"
+    },
+    {
+      icon: MapPin,
+      title: "Address",
+      details: "25 Finsbury Circus, London EC2M 7EA",
+      subtitle: "Registered office"
+    },
+    {
+      icon: Clock,
+      title: "Hours",
+      details: "Mon-Fri: 9AM-6PM",
+      subtitle: "Emergency support available"
+    }
+  ];
+
+  return (
+    <Layout>
       <div className="section-padding">
         <div className="container-custom">
           {/* Header */}
@@ -76,7 +66,8 @@ const Contact = () => {
                 Get In Touch
               </h2>
               
-              {contactInfo.map((item, index) => <Card key={index} className="card-professional">
+              {contactInfo.map((item, index) => (
+                <Card key={index} className="card-professional">
                   <CardContent className="p-6">
                     <div className="flex items-start space-x-4">
                       <div className="flex-shrink-0">
@@ -97,7 +88,8 @@ const Contact = () => {
                       </div>
                     </div>
                   </CardContent>
-                </Card>)}
+                </Card>
+              ))}
 
               {/* Quick Actions */}
               <Card className="card-professional bg-gradient-secondary text-secondary-foreground">
@@ -123,31 +115,70 @@ const Contact = () => {
                   <CardTitle>Send Us a Message</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <form onSubmit={handleSubmit} className="space-y-6">
+                  {/* Netlify form setup */}
+                  <form name="contact" method="POST" data-netlify="true" action="/thank-you" className="space-y-6">
+                    <input type="hidden" name="form-name" value="contact" />
+
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
                         <Label htmlFor="name">Full Name</Label>
-                        <Input id="name" name="name" value={formData.name} onChange={handleChange} required placeholder="Your full name" />
+                        <Input
+                          id="name"
+                          name="name"
+                          value={formData.name}
+                          onChange={handleChange}
+                          required
+                          placeholder="Your full name"
+                        />
                       </div>
                       <div>
                         <Label htmlFor="email">Email Address</Label>
-                        <Input id="email" name="email" type="email" value={formData.email} onChange={handleChange} required placeholder="your@email.com" />
+                        <Input
+                          id="email"
+                          name="email"
+                          type="email"
+                          value={formData.email}
+                          onChange={handleChange}
+                          required
+                          placeholder="your@email.com"
+                        />
                       </div>
                     </div>
 
                     <div>
                       <Label htmlFor="company">Company Name</Label>
-                      <Input id="company" name="company" value={formData.company} onChange={handleChange} placeholder="Your company name" />
+                      <Input
+                        id="company"
+                        name="company"
+                        value={formData.company}
+                        onChange={handleChange}
+                        placeholder="Your company name"
+                      />
                     </div>
 
                     <div>
                       <Label htmlFor="subject">Subject</Label>
-                      <Input id="subject" name="subject" value={formData.subject} onChange={handleChange} required placeholder="What can we help you with?" />
+                      <Input
+                        id="subject"
+                        name="subject"
+                        value={formData.subject}
+                        onChange={handleChange}
+                        required
+                        placeholder="What can we help you with?"
+                      />
                     </div>
 
                     <div>
                       <Label htmlFor="message">Message</Label>
-                      <Textarea id="message" name="message" value={formData.message} onChange={handleChange} required placeholder="Tell us about your late payment situation..." rows={6} />
+                      <Textarea
+                        id="message"
+                        name="message"
+                        value={formData.message}
+                        onChange={handleChange}
+                        required
+                        placeholder="Tell us about your late payment situation..."
+                        rows={6}
+                      />
                     </div>
 
                     <Button type="submit" className="btn-hero w-full">
@@ -180,7 +211,9 @@ const Contact = () => {
                   <h3 className="font-semibold text-foreground mb-2">
                     How much does it cost?
                   </h3>
-                  <p className="text-muted-foreground text-sm">No upfront fees. We only charge 35% of successfully recovered late fees and interest.</p>
+                  <p className="text-muted-foreground text-sm">
+                    No upfront fees. We only charge 35% of successfully recovered late fees and interest.
+                  </p>
                 </CardContent>
               </Card>
 
@@ -209,6 +242,8 @@ const Contact = () => {
           </div>
         </div>
       </div>
-    </Layout>;
+    </Layout>
+  );
 };
+
 export default Contact;
