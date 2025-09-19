@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Mail, MapPin, Clock, MessageCircle } from "lucide-react";
 import { useState } from "react";
+import { supabase } from "@/lib/supabaseClient"; // <-- Supabase client
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -23,25 +24,33 @@ const Contact = () => {
     }));
   };
 
-  const contactInfo = [
-    {
-      icon: Mail,
-      title: "Email",
-      details: "claims@claimpayuk.com",
-      subtitle: "24/7 support inbox"
-    },
-    {
-      icon: MapPin,
-      title: "Address",
-      details: "25 Finsbury Circus, London EC2M 7EA",
-      subtitle: "Registered office"
-    },
-    {
-      icon: Clock,
-      title: "Hours",
-      details: "Mon-Fri: 9AM-6PM",
-      subtitle: "Emergency support available"
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const { error } = await supabase
+      .from('contact') // <-- Make sure this table exists in Supabase
+      .insert([
+        {
+          name: formData.name,
+          email: formData.email,
+          company: formData.company,
+          subject: formData.subject,
+          message: formData.message
+        }
+      ]);
+
+    if (error) {
+      alert("Oops! Something went wrong: " + error.message);
+    } else {
+      setFormData({ name: "", email: "", company: "", subject: "", message: "" });
+      window.location.href = "/thank-you";
     }
+  };
+
+  const contactInfo = [
+    { icon: Mail, title: "Email", details: "claims@claimpayuk.com", subtitle: "24/7 support inbox" },
+    { icon: MapPin, title: "Address", details: "25 Finsbury Circus, London EC2M 7EA", subtitle: "Registered office" },
+    { icon: Clock, title: "Hours", details: "Mon-Fri: 9AM-6PM", subtitle: "Emergency support available" }
   ];
 
   return (
@@ -62,9 +71,7 @@ const Contact = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             {/* Contact Information */}
             <div className="lg:col-span-1 space-y-6">
-              <h2 className="text-2xl font-bold text-foreground mb-6">
-                Get In Touch
-              </h2>
+              <h2 className="text-2xl font-bold text-foreground mb-6">Get In Touch</h2>
               
               {contactInfo.map((item, index) => (
                 <Card key={index} className="card-professional">
@@ -76,15 +83,9 @@ const Contact = () => {
                         </div>
                       </div>
                       <div>
-                        <h3 className="font-semibold text-foreground mb-1">
-                          {item.title}
-                        </h3>
-                        <p className="text-foreground font-medium break-all">
-                          {item.details}
-                        </p>
-                        <p className="text-sm text-muted-foreground">
-                          {item.subtitle}
-                        </p>
+                        <h3 className="font-semibold text-foreground mb-1">{item.title}</h3>
+                        <p className="text-foreground font-medium break-all">{item.details}</p>
+                        <p className="text-sm text-muted-foreground">{item.subtitle}</p>
                       </div>
                     </div>
                   </CardContent>
@@ -95,12 +96,8 @@ const Contact = () => {
               <Card className="card-professional bg-gradient-secondary text-secondary-foreground">
                 <CardContent className="p-6 text-center">
                   <MessageCircle className="h-8 w-8 mx-auto mb-4" />
-                  <h3 className="text-lg font-semibold mb-2">
-                    Need Immediate Help?
-                  </h3>
-                  <p className="text-sm mb-4 opacity-90">
-                    Our emergency support team is available for urgent cases
-                  </p>
+                  <h3 className="text-lg font-semibold mb-2">Need Immediate Help?</h3>
+                  <p className="text-sm mb-4 opacity-90">Our emergency support team is available for urgent cases</p>
                   <Button variant="outline" className="text-secondary-foreground border-secondary-foreground hover:bg-secondary-foreground hover:text-secondary">
                     Emergency Contact
                   </Button>
@@ -115,127 +112,39 @@ const Contact = () => {
                   <CardTitle>Send Us a Message</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  {/* Netlify form setup */}
-                  <form name="contact" method="POST" data-netlify="true" action="/thank-you" className="space-y-6">
-                    <input type="hidden" name="form-name" value="contact" />
-
+                  <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
                         <Label htmlFor="name">Full Name</Label>
-                        <Input
-                          id="name"
-                          name="name"
-                          value={formData.name}
-                          onChange={handleChange}
-                          required
-                          placeholder="Your full name"
-                        />
+                        <Input id="name" name="name" value={formData.name} onChange={handleChange} required placeholder="Your full name" />
                       </div>
                       <div>
                         <Label htmlFor="email">Email Address</Label>
-                        <Input
-                          id="email"
-                          name="email"
-                          type="email"
-                          value={formData.email}
-                          onChange={handleChange}
-                          required
-                          placeholder="your@email.com"
-                        />
+                        <Input id="email" name="email" type="email" value={formData.email} onChange={handleChange} required placeholder="your@email.com" />
                       </div>
                     </div>
 
                     <div>
                       <Label htmlFor="company">Company Name</Label>
-                      <Input
-                        id="company"
-                        name="company"
-                        value={formData.company}
-                        onChange={handleChange}
-                        placeholder="Your company name"
-                      />
+                      <Input id="company" name="company" value={formData.company} onChange={handleChange} placeholder="Your company name" />
                     </div>
 
                     <div>
                       <Label htmlFor="subject">Subject</Label>
-                      <Input
-                        id="subject"
-                        name="subject"
-                        value={formData.subject}
-                        onChange={handleChange}
-                        required
-                        placeholder="What can we help you with?"
-                      />
+                      <Input id="subject" name="subject" value={formData.subject} onChange={handleChange} required placeholder="What can we help you with?" />
                     </div>
 
                     <div>
                       <Label htmlFor="message">Message</Label>
-                      <Textarea
-                        id="message"
-                        name="message"
-                        value={formData.message}
-                        onChange={handleChange}
-                        required
-                        placeholder="Tell us about your late payment situation..."
-                        rows={6}
-                      />
+                      <Textarea id="message" name="message" value={formData.message} onChange={handleChange} required placeholder="Tell us about your late payment situation..." rows={6} />
                     </div>
 
-                    <Button type="submit" className="btn-hero w-full">
-                      Send Message
-                    </Button>
+                    <Button type="submit" className="btn-hero w-full">Send Message</Button>
 
                     <p className="text-xs text-muted-foreground text-center">
                       We respect your privacy. Your information is never shared with third parties.
                     </p>
                   </form>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-
-          {/* FAQ Quick Links */}
-          <div className="mt-16">
-            <div className="text-center mb-8">
-              <h2 className="text-2xl font-bold text-foreground mb-4">
-                Common Questions
-              </h2>
-              <p className="text-muted-foreground">
-                Quick answers to frequently asked questions
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <Card className="card-professional">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold text-foreground mb-2">
-                    How much does it cost?
-                  </h3>
-                  <p className="text-muted-foreground text-sm">
-                    No upfront fees. We only charge 35% of successfully recovered late fees and interest.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="card-professional">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold text-foreground mb-2">
-                    How long does it take?
-                  </h3>
-                  <p className="text-muted-foreground text-sm">
-                    Most cases are resolved within 14-30 days. Emergency cases can be expedited.
-                  </p>
-                </CardContent>
-              </Card>
-
-              <Card className="card-professional">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold text-foreground mb-2">
-                    What if they don't pay?
-                  </h3>
-                  <p className="text-muted-foreground text-sm">
-                    We escalate to formal legal proceedings at no additional cost to you.
-                  </p>
                 </CardContent>
               </Card>
             </div>
