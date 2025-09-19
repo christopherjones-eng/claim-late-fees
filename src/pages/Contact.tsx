@@ -6,9 +6,11 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Mail, MapPin, Clock, MessageCircle } from "lucide-react";
 import { useState } from "react";
-import { supabase } from "@/lib/supabaseClient"; // <-- Supabase client
+import { supabase } from "@/supabaseClient"; // 👈 we’ll use this to send data
+import { useNavigate } from "react-router-dom";
 
 const Contact = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -16,6 +18,8 @@ const Contact = () => {
     subject: "",
     message: ""
   });
+
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData(prev => ({
@@ -26,31 +30,39 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
 
-    const { error } = await supabase
-      .from('contact') // <-- Make sure this table exists in Supabase
-      .insert([
-        {
-          name: formData.name,
-          email: formData.email,
-          company: formData.company,
-          subject: formData.subject,
-          message: formData.message
-        }
-      ]);
+    const { error } = await supabase.from("contacts").insert([formData]);
+
+    setLoading(false);
 
     if (error) {
-      alert("Oops! Something went wrong: " + error.message);
+      console.error("Error saving contact:", error.message);
+      alert("Something went wrong. Please try again.");
     } else {
-      setFormData({ name: "", email: "", company: "", subject: "", message: "" });
-      window.location.href = "/thank-you";
+      navigate("/thank-you"); // 👈 go to thank-you page
     }
   };
 
   const contactInfo = [
-    { icon: Mail, title: "Email", details: "claims@claimpayuk.com", subtitle: "24/7 support inbox" },
-    { icon: MapPin, title: "Address", details: "25 Finsbury Circus, London EC2M 7EA", subtitle: "Registered office" },
-    { icon: Clock, title: "Hours", details: "Mon-Fri: 9AM-6PM", subtitle: "Emergency support available" }
+    {
+      icon: Mail,
+      title: "Email",
+      details: "claims@claimpayuk.com",
+      subtitle: "24/7 support inbox"
+    },
+    {
+      icon: MapPin,
+      title: "Address",
+      details: "25 Finsbury Circus, London EC2M 7EA",
+      subtitle: "Registered office"
+    },
+    {
+      icon: Clock,
+      title: "Hours",
+      details: "Mon-Fri: 9AM-6PM",
+      subtitle: "Emergency support available"
+    }
   ];
 
   return (
@@ -71,7 +83,9 @@ const Contact = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             {/* Contact Information */}
             <div className="lg:col-span-1 space-y-6">
-              <h2 className="text-2xl font-bold text-foreground mb-6">Get In Touch</h2>
+              <h2 className="text-2xl font-bold text-foreground mb-6">
+                Get In Touch
+              </h2>
               
               {contactInfo.map((item, index) => (
                 <Card key={index} className="card-professional">
@@ -83,9 +97,15 @@ const Contact = () => {
                         </div>
                       </div>
                       <div>
-                        <h3 className="font-semibold text-foreground mb-1">{item.title}</h3>
-                        <p className="text-foreground font-medium break-all">{item.details}</p>
-                        <p className="text-sm text-muted-foreground">{item.subtitle}</p>
+                        <h3 className="font-semibold text-foreground mb-1">
+                          {item.title}
+                        </h3>
+                        <p className="text-foreground font-medium break-all">
+                          {item.details}
+                        </p>
+                        <p className="text-sm text-muted-foreground">
+                          {item.subtitle}
+                        </p>
                       </div>
                     </div>
                   </CardContent>
@@ -96,8 +116,12 @@ const Contact = () => {
               <Card className="card-professional bg-gradient-secondary text-secondary-foreground">
                 <CardContent className="p-6 text-center">
                   <MessageCircle className="h-8 w-8 mx-auto mb-4" />
-                  <h3 className="text-lg font-semibold mb-2">Need Immediate Help?</h3>
-                  <p className="text-sm mb-4 opacity-90">Our emergency support team is available for urgent cases</p>
+                  <h3 className="text-lg font-semibold mb-2">
+                    Need Immediate Help?
+                  </h3>
+                  <p className="text-sm mb-4 opacity-90">
+                    Our emergency support team is available for urgent cases
+                  </p>
                   <Button variant="outline" className="text-secondary-foreground border-secondary-foreground hover:bg-secondary-foreground hover:text-secondary">
                     Emergency Contact
                   </Button>
@@ -116,30 +140,68 @@ const Contact = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
                         <Label htmlFor="name">Full Name</Label>
-                        <Input id="name" name="name" value={formData.name} onChange={handleChange} required placeholder="Your full name" />
+                        <Input
+                          id="name"
+                          name="name"
+                          value={formData.name}
+                          onChange={handleChange}
+                          required
+                          placeholder="Your full name"
+                        />
                       </div>
                       <div>
                         <Label htmlFor="email">Email Address</Label>
-                        <Input id="email" name="email" type="email" value={formData.email} onChange={handleChange} required placeholder="your@email.com" />
+                        <Input
+                          id="email"
+                          name="email"
+                          type="email"
+                          value={formData.email}
+                          onChange={handleChange}
+                          required
+                          placeholder="your@email.com"
+                        />
                       </div>
                     </div>
 
                     <div>
                       <Label htmlFor="company">Company Name</Label>
-                      <Input id="company" name="company" value={formData.company} onChange={handleChange} placeholder="Your company name" />
+                      <Input
+                        id="company"
+                        name="company"
+                        value={formData.company}
+                        onChange={handleChange}
+                        placeholder="Your company name"
+                      />
                     </div>
 
                     <div>
                       <Label htmlFor="subject">Subject</Label>
-                      <Input id="subject" name="subject" value={formData.subject} onChange={handleChange} required placeholder="What can we help you with?" />
+                      <Input
+                        id="subject"
+                        name="subject"
+                        value={formData.subject}
+                        onChange={handleChange}
+                        required
+                        placeholder="What can we help you with?"
+                      />
                     </div>
 
                     <div>
                       <Label htmlFor="message">Message</Label>
-                      <Textarea id="message" name="message" value={formData.message} onChange={handleChange} required placeholder="Tell us about your late payment situation..." rows={6} />
+                      <Textarea
+                        id="message"
+                        name="message"
+                        value={formData.message}
+                        onChange={handleChange}
+                        required
+                        placeholder="Tell us about your late payment situation..."
+                        rows={6}
+                      />
                     </div>
 
-                    <Button type="submit" className="btn-hero w-full">Send Message</Button>
+                    <Button type="submit" className="btn-hero w-full" disabled={loading}>
+                      {loading ? "Sending..." : "Send Message"}
+                    </Button>
 
                     <p className="text-xs text-muted-foreground text-center">
                       We respect your privacy. Your information is never shared with third parties.
