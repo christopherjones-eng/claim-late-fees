@@ -6,25 +6,28 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Mail, MapPin, Clock, MessageCircle } from "lucide-react";
 import { useState } from "react";
-import { supabase } from "@/supabaseClient"; // 👈 we’ll use this to send data
+import { supabase } from "@/supabaseClient"; // ✅ import Supabase client
 import { useNavigate } from "react-router-dom";
 
 const Contact = () => {
   const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     company: "",
     subject: "",
-    message: ""
+    message: "",
   });
 
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData(prev => ({
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     }));
   };
 
@@ -32,15 +35,22 @@ const Contact = () => {
     e.preventDefault();
     setLoading(true);
 
-    const { error } = await supabase.from("contacts").insert([formData]);
+    const { error } = await supabase.from("contacts").insert([
+      {
+        name: formData.name,
+        email: formData.email,
+        company: formData.company,
+        subject: formData.subject,
+        message: formData.message,
+      },
+    ]);
 
     setLoading(false);
 
     if (error) {
-      console.error("Error saving contact:", error.message);
-      alert("Something went wrong. Please try again.");
+      alert("Something went wrong: " + error.message);
     } else {
-      navigate("/thank-you"); // 👈 go to thank-you page
+      navigate("/thank-you"); // ✅ redirect after success
     }
   };
 
@@ -49,20 +59,20 @@ const Contact = () => {
       icon: Mail,
       title: "Email",
       details: "claims@claimpayuk.com",
-      subtitle: "24/7 support inbox"
+      subtitle: "24/7 support inbox",
     },
     {
       icon: MapPin,
       title: "Address",
       details: "25 Finsbury Circus, London EC2M 7EA",
-      subtitle: "Registered office"
+      subtitle: "Registered office",
     },
     {
       icon: Clock,
       title: "Hours",
       details: "Mon-Fri: 9AM-6PM",
-      subtitle: "Emergency support available"
-    }
+      subtitle: "Emergency support available",
+    },
   ];
 
   return (
@@ -75,8 +85,9 @@ const Contact = () => {
               Contact Our <span className="text-secondary">Expert Team</span>
             </h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              Have questions about late payment recovery? Need help with a specific case? 
-              Our team of specialists is here to help you get paid what you're owed.
+              Have questions about late payment recovery? Need help with a
+              specific case? Our team of specialists is here to help you get
+              paid what you're owed.
             </p>
           </div>
 
@@ -86,7 +97,7 @@ const Contact = () => {
               <h2 className="text-2xl font-bold text-foreground mb-6">
                 Get In Touch
               </h2>
-              
+
               {contactInfo.map((item, index) => (
                 <Card key={index} className="card-professional">
                   <CardContent className="p-6">
@@ -122,7 +133,10 @@ const Contact = () => {
                   <p className="text-sm mb-4 opacity-90">
                     Our emergency support team is available for urgent cases
                   </p>
-                  <Button variant="outline" className="text-secondary-foreground border-secondary-foreground hover:bg-secondary-foreground hover:text-secondary">
+                  <Button
+                    variant="outline"
+                    className="text-secondary-foreground border-secondary-foreground hover:bg-secondary-foreground hover:text-secondary"
+                  >
                     Emergency Contact
                   </Button>
                 </CardContent>
@@ -199,12 +213,17 @@ const Contact = () => {
                       />
                     </div>
 
-                    <Button type="submit" className="btn-hero w-full" disabled={loading}>
+                    <Button
+                      type="submit"
+                      className="btn-hero w-full"
+                      disabled={loading}
+                    >
                       {loading ? "Sending..." : "Send Message"}
                     </Button>
 
                     <p className="text-xs text-muted-foreground text-center">
-                      We respect your privacy. Your information is never shared with third parties.
+                      We respect your privacy. Your information is never shared
+                      with third parties.
                     </p>
                   </form>
                 </CardContent>
