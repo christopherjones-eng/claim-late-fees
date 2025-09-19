@@ -4,10 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 const Invoice = () => {
-  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     company: "",
     email: "",
@@ -38,7 +36,7 @@ const Invoice = () => {
                 name="invoice"
                 method="POST"
                 data-netlify="true"
-                onSubmit={() => navigate("/thank-you")}
+                action="/thank-you"
                 className="space-y-6"
               >
                 {/* Required hidden field for Netlify */}
