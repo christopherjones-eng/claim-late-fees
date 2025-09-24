@@ -1,13 +1,13 @@
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Layout from "@/components/Layout/Layout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { supabase } from "@/supabaseClient";
 
-const Invoice = () => {
+const Invoice: React.FC = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     company: "",
@@ -18,9 +18,7 @@ const Invoice = () => {
   });
   const [error, setError] = useState<string | null>(null);
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
@@ -33,8 +31,7 @@ const Invoice = () => {
 
     const { company, email, invoiceNumber, amount, message } = formData;
 
-    // Insert into Supabase
-    const { error } = await supabase.from("invoices").insert([
+    const { error: supabaseError } = await supabase.from("invoices").insert([
       {
         name: company,
         email,
@@ -43,8 +40,8 @@ const Invoice = () => {
       },
     ]);
 
-    if (error) {
-      console.error(error);
+    if (supabaseError) {
+      console.error(supabaseError);
       setError("Something went wrong. Please try again.");
     } else {
       navigate("/thank-you");
@@ -66,6 +63,7 @@ const Invoice = () => {
                   <Input
                     id="company"
                     name="company"
+                    type="text"
                     value={formData.company}
                     onChange={handleChange}
                     required
@@ -89,6 +87,7 @@ const Invoice = () => {
                   <Input
                     id="invoiceNumber"
                     name="invoiceNumber"
+                    type="text"
                     value={formData.invoiceNumber}
                     onChange={handleChange}
                     required
@@ -112,6 +111,7 @@ const Invoice = () => {
                   <Input
                     id="message"
                     name="message"
+                    type="text"
                     value={formData.message}
                     onChange={handleChange}
                     placeholder="Optional details"
@@ -133,5 +133,4 @@ const Invoice = () => {
 };
 
 export default Invoice;
-
 
