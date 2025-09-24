@@ -17,10 +17,9 @@ const Invoice: React.FC = () => {
     message: "",
   });
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
@@ -30,6 +29,7 @@ const Invoice: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+    setLoading(true);
 
     const { company, email, invoiceNumber, amount, message } = formData;
 
@@ -41,16 +41,22 @@ const Invoice: React.FC = () => {
         company,
         email,
         invoice_number: invoiceNumber,
-        amount,
+        amount: Number(amount), // Convert string to number
         message,
       },
     ]);
 
+    setLoading(false);
+
     if (supabaseError) {
       console.error("Supabase error:", supabaseError);
-      setError("Something went wrong. Please try again.");
+      setError(`Something went wrong: ${supabaseError.message}`);
+      alert(`Submission failed: ${supabaseError.message}`);
     } else {
       console.log("Insert success:", data);
+      alert("Invoice submitted successfully!");
+      // Reset form
+      setFormData({ company: "", email: "", invoiceNumber: "", amount: "", message: "" });
       navigate("/thank-you");
     }
   };
@@ -127,8 +133,8 @@ const Invoice: React.FC = () => {
 
                 {error && <p className="text-red-500">{error}</p>}
 
-                <Button type="submit" className="btn-hero w-full">
-                  Submit Invoice
+                <Button type="submit" className="btn-hero w-full" disabled={loading}>
+                  {loading ? "Submitting..." : "Submit Invoice"}
                 </Button>
               </form>
             </CardContent>
@@ -140,4 +146,5 @@ const Invoice: React.FC = () => {
 };
 
 export default Invoice;
+
 
