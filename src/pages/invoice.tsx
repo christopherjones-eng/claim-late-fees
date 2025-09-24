@@ -33,8 +33,10 @@ const Invoice: React.FC = () => {
 
     const { company, email, invoiceNumber, amount, message } = formData;
 
-    // Insert into Supabase with correct column names
-    const { error: supabaseError } = await supabase.from("invoices").insert([
+    // Debug: log what is being submitted
+    console.log("Submitting invoice:", { company, email, invoiceNumber, amount, message });
+
+    const { data, error: supabaseError } = await supabase.from("invoices").insert([
       {
         company,
         email,
@@ -45,9 +47,10 @@ const Invoice: React.FC = () => {
     ]);
 
     if (supabaseError) {
-      console.error(supabaseError);
+      console.error("Supabase error:", supabaseError);
       setError("Something went wrong. Please try again.");
     } else {
+      console.log("Insert success:", data);
       navigate("/thank-you");
     }
   };
@@ -137,3 +140,4 @@ const Invoice: React.FC = () => {
 };
 
 export default Invoice;
+
