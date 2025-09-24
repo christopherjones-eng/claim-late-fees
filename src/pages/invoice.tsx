@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { supabase } from "@/supabaseClient"; // ✅ import Supabase client
+import { supabase } from "@/supabaseClient";
 
 const Invoice = () => {
   const navigate = useNavigate();
@@ -16,8 +16,7 @@ const Invoice = () => {
     amount: "",
     message: "",
   });
-
-  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -30,7 +29,7 @@ const Invoice = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
+    setError("");
 
     const { error } = await supabase.from("invoices").insert([
       {
@@ -42,12 +41,11 @@ const Invoice = () => {
       },
     ]);
 
-    setLoading(false);
-
     if (error) {
-      alert("Something went wrong: " + error.message);
+      console.error(error);
+      setError("Something went wrong. Please try again.");
     } else {
-      navigate("/thank-you"); // ✅ redirect on success
+      navigate("/thank-you");
     }
   };
 
@@ -118,8 +116,10 @@ const Invoice = () => {
                   />
                 </div>
 
-                <Button type="submit" className="btn-hero w-full" disabled={loading}>
-                  {loading ? "Submitting..." : "Submit Invoice"}
+                {error && <p className="text-red-500">{error}</p>}
+
+                <Button type="submit" className="btn-hero w-full">
+                  Submit Invoice
                 </Button>
               </form>
             </CardContent>
