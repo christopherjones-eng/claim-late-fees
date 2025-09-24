@@ -9,6 +9,7 @@ import { supabase } from "@/supabaseClient";
 
 const Invoice: React.FC = () => {
   const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     company: "",
     email: "",
@@ -16,8 +17,10 @@ const Invoice: React.FC = () => {
     amount: "",
     message: "",
   });
+
   const [error, setError] = useState<string | null>(null);
 
+  // Handle input changes
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData((prev) => ({
       ...prev,
@@ -25,25 +28,28 @@ const Invoice: React.FC = () => {
     }));
   };
 
+  // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
 
     const { company, email, invoiceNumber, amount, message } = formData;
 
-    // Insert into Supabase with correct column names
-    const { error: supabaseError } = await supabase.from("invoices").insert([
-      { company, email, invoice_number: invoiceNumber, amount, message }
-    ]);
+    try {
+      const { error: supabaseError } = await supabase.from("invoices").insert([
+        { company, email, invoice_number: invoiceNumber, amount, message },
+      ]);
 
-    if (supabaseError) {
-      console.error(supabaseError);
+      if (supabaseError) {
+        console.error("Supabase Error:", supabaseError);
+        setError("Something went wrong. Please try again.");
+      } else {
+        alert("Invoice submitted successfully!");
+        navigate("/thank-you");
+      }
+    } catch (err) {
+      console.error("Unexpected Error:", err);
       setError("Something went wrong. Please try again.");
-    } else {
-      // Optional: show success alert
-      alert("Invoice submitted successfully!");
-      // Redirect to thank-you page
-      navigate("/thank-you");
     }
   };
 
@@ -132,3 +138,4 @@ const Invoice: React.FC = () => {
 };
 
 export default Invoice;
+
