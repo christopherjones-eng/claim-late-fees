@@ -1,10 +1,11 @@
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Contact from "@/pages/Contact";
-import Invoice from "@/pages/Invoice"; // ✅ fixed import (capital I)
-import ThankYou from "@/pages/thank-you";
 import Home from "@/pages/Index";
+import Contact from "@/pages/Contact";
+import Invoice from "@/pages/Invoice"; // ✅ matches the filename exactly
+import ThankYou from "@/pages/ThankYou"; // ensure filename is ThankYou.tsx
 
-function App() {
+const App: React.FC = () => {
   return (
     <Router>
       <Routes>
@@ -15,7 +16,6 @@ function App() {
       </Routes>
     </Router>
   );
-}
+};
 
 export default App;
-
