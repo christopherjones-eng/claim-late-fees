@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Contact from "@/pages/Contact";
-import Invoice from "@/pages/invoice";   // lowercase import
-import ThankYou from "@/pages/thank-you"; // lowercase import
+import Invoice from "@/pages/Invoice"; // ✅ fixed import (capital I)
+import ThankYou from "@/pages/thank-you";
 import Home from "@/pages/Index";
 
 function App() {
