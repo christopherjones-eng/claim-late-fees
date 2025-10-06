@@ -17,7 +17,6 @@ const Invoice: React.FC = () => {
     message: "",
   });
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData((prev) => ({
@@ -29,35 +28,27 @@ const Invoice: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
-    setLoading(true);
+
+    console.log("Submitting invoice:", formData);
 
     const { company, email, invoiceNumber, amount, message } = formData;
 
-    try {
-      const { data, error: supabaseError } = await supabase.from("invoices").insert([
-        {
-          company,
-          email,
-          invoice_number: invoiceNumber,
-          amount: Number(amount),
-          message,
-        },
-      ]);
+    const { data, error: supabaseError } = await supabase.from("invoices").insert([
+      {
+        company,
+        email,
+        invoice_number: invoiceNumber,
+        amount,
+        message,
+      },
+    ]);
 
-      setLoading(false);
-
-      if (supabaseError) {
-        console.error("Supabase error:", supabaseError);
-        setError(`Something went wrong: ${supabaseError.message}`);
-      } else {
-        // Success
-        setFormData({ company: "", email: "", invoiceNumber: "", amount: "", message: "" });
-        navigate("/thank-you");
-      }
-    } catch (err) {
-      setLoading(false);
-      console.error("Unexpected error:", err);
+    if (supabaseError) {
+      console.error("Supabase error:", supabaseError);
       setError("Something went wrong. Please try again.");
+    } else {
+      console.log("Insert success:", data);
+      navigate("/thank-you");
     }
   };
 
@@ -67,12 +58,12 @@ const Invoice: React.FC = () => {
         <div className="container-custom">
           <Card className="card-professional">
             <CardHeader>
-              <CardTitle>Submit Your Invoice</CardTitle>
+              <CardTitle>Submit your invoice</CardTitle>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <Label htmlFor="company">Company Name</Label>
+                  <Label htmlFor="company">Company name</Label>
                   <Input
                     id="company"
                     name="company"
@@ -84,7 +75,7 @@ const Invoice: React.FC = () => {
                 </div>
 
                 <div>
-                  <Label htmlFor="email">Email Address</Label>
+                  <Label htmlFor="email">Email address</Label>
                   <Input
                     id="email"
                     name="email"
@@ -96,7 +87,7 @@ const Invoice: React.FC = () => {
                 </div>
 
                 <div>
-                  <Label htmlFor="invoiceNumber">Invoice Number</Label>
+                  <Label htmlFor="invoiceNumber">Invoice number</Label>
                   <Input
                     id="invoiceNumber"
                     name="invoiceNumber"
@@ -120,7 +111,7 @@ const Invoice: React.FC = () => {
                 </div>
 
                 <div>
-                  <Label htmlFor="message">Additional Notes</Label>
+                  <Label htmlFor="message">Additional notes</Label>
                   <Input
                     id="message"
                     name="message"
@@ -133,8 +124,8 @@ const Invoice: React.FC = () => {
 
                 {error && <p className="text-red-500">{error}</p>}
 
-                <Button type="submit" className="btn-hero w-full" disabled={loading}>
-                  {loading ? "Submitting..." : "Submit Invoice"}
+                <Button type="submit" className="btn-hero w-full">
+                  Submit claim for review
                 </Button>
               </form>
             </CardContent>
@@ -146,4 +137,5 @@ const Invoice: React.FC = () => {
 };
 
 export default Invoice;
+
 
