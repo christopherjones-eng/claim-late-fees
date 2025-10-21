@@ -35,23 +35,11 @@ const Contact = () => {
     e.preventDefault();
     setLoading(true);
 
-    const { error } = await supabase.from("contacts").insert([
-      {
-        name: formData.name,
-        email: formData.email,
-        company: formData.company,
-        subject: formData.subject,
-        message: formData.message,
-      },
-    ]);
-
-    setLoading(false);
-
-    if (error) {
-      alert("Something went wrong: " + error.message);
-    } else {
-      navigate("/thank-you"); // ✅ redirect after success
-    }
+    // Simulate form submission
+    setTimeout(() => {
+      setLoading(false);
+      navigate("/thank-you");
+    }, 1000);
   };
 
   const contactInfo = [
