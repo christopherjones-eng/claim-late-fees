@@ -13,6 +13,7 @@ const HowItWorks = () => {
       document.getElementById('claim-form')?.scrollIntoView({ behavior: 'smooth' });
     }, 100);
   };
+
   const steps = [
     {
       icon: FileText,
