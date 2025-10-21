@@ -2,8 +2,10 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "@/pages/Index";
 import Contact from "@/pages/Contact";
-import Invoice from "@/pages/Invoice"; // ✅ matches the filename exactly
-import ThankYou from "@/pages/ThankYou"; // ensure filename is ThankYou.tsx
+import Invoice from "@/pages/Invoice";
+import ThankYou from "@/pages/ThankYou";
+import About from "@/pages/About";
+import HowItWorks from "@/pages/HowItWorks";
 
 const App: React.FC = () => {
   return (
@@ -13,6 +15,8 @@ const App: React.FC = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="/invoice" element={<Invoice />} />
         <Route path="/thank-you" element={<ThankYou />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/how-it-works" element={<HowItWorks />} />
       </Routes>
     </Router>
   );
