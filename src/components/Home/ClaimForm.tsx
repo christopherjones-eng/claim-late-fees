@@ -1,13 +1,17 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { FileUp, Shield } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const ClaimForm = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     companyName: "",
     contactName: "",
@@ -18,24 +22,39 @@ const ClaimForm = () => {
     dueDate: ""
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Claim Submitted Successfully!",
-      description: "Our team will review your case and contact you within 24 hours.",
-      duration: 5000,
-    });
-    
-    // Reset form
-    setFormData({
-      companyName: "",
-      contactName: "",
-      email: "",
-      debtorCompany: "",
-      invoiceAmount: "",
-      invoiceDate: "",
-      dueDate: ""
-    });
+    setLoading(true);
+
+    try {
+      const { error } = await supabase
+        .from("claims")
+        .insert([
+          {
+            company_name: formData.companyName,
+            contact_name: formData.contactName,
+            email: formData.email,
+            debtor_company: formData.debtorCompany,
+            invoice_amount: parseFloat(formData.invoiceAmount),
+            invoice_date: formData.invoiceDate,
+            due_date: formData.dueDate,
+          },
+        ]);
+
+      if (error) throw error;
+
+      // Redirect to thank you page
+      navigate("/thank-you");
+    } catch (error) {
+      console.error("Error submitting claim:", error);
+      toast({
+        title: "Submission Failed",
+        description: "There was an error submitting your claim. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -170,8 +189,8 @@ const ClaimForm = () => {
                   </p>
                 </div>
 
-                <Button type="submit" className="btn-hero w-full text-lg py-3">
-                  Submit Claim for Review
+                <Button type="submit" className="btn-hero w-full text-lg py-3" disabled={loading}>
+                  {loading ? "Submitting..." : "Submit Claim for Review"}
                 </Button>
 
                 <p className="text-xs text-muted-foreground text-center">
